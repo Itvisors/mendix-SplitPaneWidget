@@ -3,15 +3,15 @@ import { SplitPaneContainer } from "./components/SplitPaneContainer";
 
 export class preview extends Component {
     render() {
-        const { defaultSize, minSize, maxSize, primaryContent, secondaryContent } = this.props;
+        const { defaultSize, minSizePrimary, minSizeSecondary, primaryContent, secondaryContent } = this.props;
         return (
             <SplitPaneContainer
                 isPreview
                 class={this.props.class}
                 splitType={this.props.splitType}
                 defaultSize={defaultSize ? defaultSize : 400}
-                minSize={minSize ? minSize : 0}
-                maxSize={maxSize ? maxSize : 0}
+                minSizePrimary={minSizePrimary ? minSizePrimary : 0}
+                minSizeSecondary={minSizeSecondary ? minSizeSecondary : 20}
                 primaryContentPreview={primaryContent}
                 secondaryContentPreview={secondaryContent}
             />
