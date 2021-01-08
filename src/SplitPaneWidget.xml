@@ -8,9 +8,40 @@
     <icon/>
     <properties>
         <propertyGroup caption="General">
-            <property key="sampleText" type="string" required="false">
-                <caption>Default value</caption>
-                <description>Sample text input</description>
+            <property key="splitType" type="enumeration" defaultValue="vertical">
+                <caption>Split</caption>
+                <description></description>
+                <enumerationValues>
+                    <enumerationValue key="vertical">Vertical</enumerationValue>
+                    <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="defaultSize" type="integer" defaultValue="400">
+                <caption>Default size</caption>
+                <description>When no size attribute is set or the value is empty or zero, use this value for the size of the top or left pane</description>
+            </property>
+            <property key="size" type="attribute" required="false">
+                <caption>Current size</caption>
+                <description>Optional. When the attribute is set, the size of the top or left pane is set using this value. Also the attribute is updated after the divider is dragged.</description>
+                <attributeTypes>
+                    <attributeType name="Integer" />
+                </attributeTypes>
+            </property>
+            <property key="minSize" type="integer" defaultValue="0">
+                <caption>Minimum size</caption>
+                <description>Leave at zero for no minimum.</description>
+            </property>
+            <property key="maxSize" type="integer" defaultValue="0">
+                <caption>Maximum size</caption>
+                <description>Leave at zero to make the devider stop at the opposite end. Use a negative value to set the minimum size for the second pane.</description>
+            </property>
+            <property key="primaryContent" type="widgets">
+                <caption>Top or left pane</caption>
+                <description></description>
+            </property>
+            <property key="secondaryContent" type="widgets">
+                <caption>Bottom or right pane</caption>
+                <description></description>
             </property>
         </propertyGroup>
     </properties>
