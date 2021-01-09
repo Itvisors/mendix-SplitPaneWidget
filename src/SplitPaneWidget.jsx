@@ -14,7 +14,7 @@ export default class SplitPaneWidget extends Component {
                 splitType={this.props.splitType}
                 height={this.props.height}
                 defaultSize={this.props.defaultSize}
-                size={this.props.size}
+                sizeAttr={this.props.sizeAttr}
                 minSizePrimary={this.props.minSizePrimary}
                 minSizeSecondary={this.props.minSizeSecondary}
                 primaryContent={this.props.primaryContent}
