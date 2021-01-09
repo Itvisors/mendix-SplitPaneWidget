@@ -20,7 +20,7 @@ export class SplitPaneContainer extends Component {
 
         const className = "splitpane-container " + this.props.class;
         return (
-            <div className={className}>
+            <div className={className} style={{ height: this.props.height }}>
                 <SplitPane
                     split={this.props.splitType}
                     defaultSize={sizeValue + "px"}
@@ -35,15 +35,16 @@ export class SplitPaneContainer extends Component {
     }
 
     getPaneContent(content, contentPreview) {
+        const className = "splitpane-content " + this.props.splitType + "-pane";
         if (this.props.isPreview) {
             const ContentRenderer = contentPreview.renderer;
             return (
                 <ContentRenderer>
-                    <pane className="splitpane-content" />
+                    <div className={className} />
                 </ContentRenderer>
             );
         } else {
-            return <pane className="splitpane-content">{content}</pane>;
+            return <div className={className}>{content}</div>;
         }
     }
 }

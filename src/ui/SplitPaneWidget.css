@@ -4,7 +4,6 @@ CSS taken from example in react-split-pane repo
 div.splitpane-container {
     position: relative;
     flex: 1;
-    height: 400px;
 }
 
 div.splitpane-container .Resizer {
@@ -57,4 +56,8 @@ div.splitpane-container .Resizer.disabled {
 
 div.splitpane-container .Resizer.disabled:hover {
     border-color: transparent;
+}
+
+div.splitpane-content.horizontal-pane {
+    width: 100%;
 }

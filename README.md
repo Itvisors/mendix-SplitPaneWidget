@@ -5,7 +5,7 @@
 [feature highlights]
 
 ## Usage
-[step by step instructions]
+- Set minimum sizes! Without these, the contents can be squeezed beyond breaking point, so a sensible minimum, depending on your content, is crucial.
 
 ## Demo project
 [link to sandbox]

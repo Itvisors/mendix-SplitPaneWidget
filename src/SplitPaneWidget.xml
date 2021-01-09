@@ -20,6 +20,10 @@
                 <caption>Default size</caption>
                 <description>When no size attribute is set or the value is empty or zero, use this value for the size of the top or left pane</description>
             </property>
+            <property key="height" type="string" defaultValue="500px">
+                <caption>Height</caption>
+                <description>Height of the entire split pane. Must be a valid CSS height value. When placed in a scroll container, as with regular layouts, height in percentage will not work. Specify a height in pixels.</description>
+            </property>
             <property key="size" type="attribute" required="false">
                 <caption>Current size</caption>
                 <description>Optional. When the attribute is set, the size of the top or left pane is set using this value. Also the attribute is updated after the divider is dragged.</description>
@@ -42,6 +46,10 @@
             <property key="secondaryContent" type="widgets">
                 <caption>Right or bottom pane</caption>
                 <description></description>
+            </property>
+            <property key="onChangeAction" type="action" required="false">
+                <caption>On change action</caption>
+                <description>Optional. Triggered when divider has been dropped at a new position.</description>
             </property>
         </propertyGroup>
     </properties>
