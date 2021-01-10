@@ -46,7 +46,7 @@ export class SplitPaneContainer extends Component {
 
     handleDragFinished(newSize) {
         const { sizeAttr, onChangeAction } = this.props;
-        console.info("SplitPaneContainer handleDragFinished new size: " + newSize);
+        // console.info("SplitPaneContainer handleDragFinished new size: " + newSize);
         if (sizeAttr) {
             sizeAttr.setTextValue("" + newSize);
             if (onChangeAction && onChangeAction.canExecute && !onChangeAction.isExecuting) {

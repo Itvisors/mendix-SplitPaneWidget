@@ -19,6 +19,7 @@ export default class SplitPaneWidget extends Component {
                 minSizeSecondary={this.props.minSizeSecondary}
                 primaryContent={this.props.primaryContent}
                 secondaryContent={this.props.secondaryContent}
+                onChangeAction={this.props.onChangeAction}
             />
         );
     }

@@ -20,7 +20,8 @@ public class TestContext
 	 */
 	public enum MemberNames
 	{
-		SplitPaneSize("SplitPaneSize");
+		SplitPaneSizeVertical("SplitPaneSizeVertical"),
+		SplitPaneSizeHorizontal("SplitPaneSizeHorizontal");
 
 		private java.lang.String metaName;
 
@@ -116,39 +117,75 @@ public class TestContext
 		com.mendix.core.Core.delete(context, getMendixObject());
 	}
 	/**
-	 * @return value of SplitPaneSize
+	 * @return value of SplitPaneSizeVertical
 	 */
-	public final java.lang.Integer getSplitPaneSize()
+	public final java.lang.Integer getSplitPaneSizeVertical()
 	{
-		return getSplitPaneSize(getContext());
+		return getSplitPaneSizeVertical(getContext());
 	}
 
 	/**
 	 * @param context
-	 * @return value of SplitPaneSize
+	 * @return value of SplitPaneSizeVertical
 	 */
-	public final java.lang.Integer getSplitPaneSize(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getSplitPaneSizeVertical(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.SplitPaneSize.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.SplitPaneSizeVertical.toString());
 	}
 
 	/**
-	 * Set value of SplitPaneSize
-	 * @param splitpanesize
+	 * Set value of SplitPaneSizeVertical
+	 * @param splitpanesizevertical
 	 */
-	public final void setSplitPaneSize(java.lang.Integer splitpanesize)
+	public final void setSplitPaneSizeVertical(java.lang.Integer splitpanesizevertical)
 	{
-		setSplitPaneSize(getContext(), splitpanesize);
+		setSplitPaneSizeVertical(getContext(), splitpanesizevertical);
 	}
 
 	/**
-	 * Set value of SplitPaneSize
+	 * Set value of SplitPaneSizeVertical
 	 * @param context
-	 * @param splitpanesize
+	 * @param splitpanesizevertical
 	 */
-	public final void setSplitPaneSize(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer splitpanesize)
+	public final void setSplitPaneSizeVertical(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer splitpanesizevertical)
 	{
-		getMendixObject().setValue(context, MemberNames.SplitPaneSize.toString(), splitpanesize);
+		getMendixObject().setValue(context, MemberNames.SplitPaneSizeVertical.toString(), splitpanesizevertical);
+	}
+
+	/**
+	 * @return value of SplitPaneSizeHorizontal
+	 */
+	public final java.lang.Integer getSplitPaneSizeHorizontal()
+	{
+		return getSplitPaneSizeHorizontal(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of SplitPaneSizeHorizontal
+	 */
+	public final java.lang.Integer getSplitPaneSizeHorizontal(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.SplitPaneSizeHorizontal.toString());
+	}
+
+	/**
+	 * Set value of SplitPaneSizeHorizontal
+	 * @param splitpanesizehorizontal
+	 */
+	public final void setSplitPaneSizeHorizontal(java.lang.Integer splitpanesizehorizontal)
+	{
+		setSplitPaneSizeHorizontal(getContext(), splitpanesizehorizontal);
+	}
+
+	/**
+	 * Set value of SplitPaneSizeHorizontal
+	 * @param context
+	 * @param splitpanesizehorizontal
+	 */
+	public final void setSplitPaneSizeHorizontal(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer splitpanesizehorizontal)
+	{
+		getMendixObject().setValue(context, MemberNames.SplitPaneSizeHorizontal.toString(), splitpanesizehorizontal);
 	}
 
 	/**
