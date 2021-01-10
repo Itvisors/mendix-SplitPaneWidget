@@ -9,6 +9,7 @@ Split pane widget. The platform used to have one but it got removed in Mendix 7,
 - Call an action after the divider has been moved
 - Each pane can be scrolled separately, vertical scrollbar will appear automatically if content is higher than pane size 
 - Configure minimum sizes for each pane.
+- Multiple split panes can be nested to create an IDE style page
 
 ## Limitations
 - Mendix does not allow just any widget to be placed in the container of a pluggable widget. Unfortunately this also includes datagrid and listview.
