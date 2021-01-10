@@ -16,6 +16,14 @@
                     <enumerationValue key="horizontal">Horizontal</enumerationValue>
                 </enumerationValues>
             </property>
+            <property key="primaryContent" type="widgets">
+                <caption>Left or top pane</caption>
+                <description></description>
+            </property>
+            <property key="secondaryContent" type="widgets">
+                <caption>Right or bottom pane</caption>
+                <description></description>
+            </property>
             <property key="defaultSize" type="integer" defaultValue="400">
                 <caption>Default size</caption>
                 <description>When no size attribute is set or the value is empty or zero, use this value for the size of the top or left pane</description>
@@ -31,6 +39,8 @@
                     <attributeType name="Integer" />
                 </attributeTypes>
             </property>
+        </propertyGroup>
+        <propertyGroup caption="Constraints">
             <property key="minSizePrimary" type="integer" defaultValue="200">
                 <caption>Min. size left/top</caption>
                 <description>Minimum size for the left or top container. Leave at zero for no minimum. Note that some content will 'break out' from the pane when the width is too small.</description>
@@ -39,14 +49,8 @@
                 <caption>Min. size right/bottom</caption>
                 <description>Minimum size for the right or bottom container. The minimum is 20 to prevent the divider from becoming unreachable</description>
             </property>
-            <property key="primaryContent" type="widgets">
-                <caption>Left or top pane</caption>
-                <description></description>
-            </property>
-            <property key="secondaryContent" type="widgets">
-                <caption>Right or bottom pane</caption>
-                <description></description>
-            </property>
+        </propertyGroup>
+        <propertyGroup caption="Events">
             <property key="onChangeAction" type="action" required="false">
                 <caption>On change action</caption>
                 <description>Optional. Triggered when divider has been dropped at a new position, only when an attribute has been selected for the current size.</description>
