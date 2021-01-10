@@ -61,3 +61,7 @@ div.splitpane-container .Resizer.disabled:hover {
 div.splitpane-content.horizontal-pane {
     width: 100%;
 }
+
+div.splitpane-container div.Pane {
+    overflow-y: auto;
+}
