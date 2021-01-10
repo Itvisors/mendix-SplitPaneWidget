@@ -27,6 +27,14 @@ Split pane widget. The platform used to have one but it got removed in Mendix 7,
 
 The on change action is optional, but if you don't configure it, commit the context object somewhere in your logic or use a save button on the page.
 
+## Borders
+The widget combines nicely with card classes to show a border around each pane. Put a small right spacing on the first (left) card container and a small left spacing on the second (right) card container to leave some space between the cards and the divider.
+
+Use class `max-height` on the widget and `content-max-height` on each card container to make it use up all vertical space. This ensures that both cards extend to the full height of the split pane. 
+
+## Layout grids
+Place the widget on the page and put the layout grid inside the widget, not the other way around. If you place the widget in a layout grid and then nest another layout grid in the split planes, double scrollbars may occur. Placing the split pane as first element on the page prevents this.
+
 ## Issues, suggestions and feature requests
 [link to GitHub issues](https://github.com/Itvisors/mendix-SplitPaneWidget/issues)
 

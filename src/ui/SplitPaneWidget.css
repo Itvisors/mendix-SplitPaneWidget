@@ -58,10 +58,18 @@ div.splitpane-container .Resizer.disabled:hover {
     border-color: transparent;
 }
 
+div.splitpane-container div.Pane {
+    overflow-y: auto;
+}
+
 div.splitpane-content.horizontal-pane {
     width: 100%;
 }
 
-div.splitpane-container div.Pane {
-    overflow-y: auto;
+div.splitpane-container.max-height div.splitpane-content.vertical-pane {
+    height: 100%;
+}
+
+div.splitpane-container.max-height div.splitpane-content.vertical-pane .content-max-height {
+    height: 100%;
 }
