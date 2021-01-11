@@ -1,10 +1,12 @@
 ## SplitPaneWidget
-Split pane widget. The platform used to have one but it got removed in Mendix 7, without a proper replacement.
+Split pane widget. Split your page in panes, allowing the user to drag the splitter to resize the panes.
+
+The platform used to have one but it got removed in Mendix 7, without a proper replacement.
 
 ## Features
 - Draggable divider to change the splitter position
 - Horizontal and vertical
-- Works without context object
+- Works with and without context object
 - To allow saving the preferred divider position, place widget in a dataview and configure an attribute to hold the splitter position
 - Call an action after the divider has been moved
 - Each pane can be scrolled separately, vertical scrollbar will appear automatically if content is higher than pane size 
@@ -18,7 +20,9 @@ Split pane widget. The platform used to have one but it got removed in Mendix 7,
 - Place the widget on the page
 - Put content in each panel
 - Configure the default divider position.
-- Set minimum sizes! Without these, the contents can be squeezed beyond breaking point, so a sensible minimum, depending on your content, is crucial.
+- Set minimum sizes! Without these, the contents can be squeezed beyond breaking point, causing content to 'escape' the container or render incorrectly. So a sensible minimum, depending on your content, is crucial.
+
+To simulate hiding a pane, place the contents in snippets and use conditional visibility to either show the split pane or just the contents of one of the split panes 
 
 ## Save the divider position
 - Place the widget in a dataview
