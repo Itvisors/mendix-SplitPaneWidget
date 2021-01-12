@@ -22,7 +22,10 @@ export class SplitPaneContainer extends Component {
         // they can just set a minimum value for the right/bottom container.
         const maxSize = minSizeSecondary > 20 ? -minSizeSecondary : -20;
 
-        let sizeValue = sizeAttr?.value ? Number(sizeAttr.value) : this.props.defaultSize;
+        let sizeValue = sizeAttr?.value ? Number(sizeAttr.value) : 0;
+        if (sizeValue === 0) {
+            sizeValue = this.props.defaultSize;
+        }
         if (sizeValue < minSize) {
             sizeValue = minSize;
         }
