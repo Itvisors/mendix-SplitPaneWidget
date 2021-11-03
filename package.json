@@ -5,6 +5,9 @@
   "description": "Split pane widget",
   "copyright": "ITvisors 2021",
   "author": "Marcel Groeneweg",
+  "engines": {
+    "node": ">=12"
+  },
   "config": {
     "projectPath": "./test/",
     "mendixHost": "http://localhost:8080",
@@ -12,8 +15,7 @@
   },
   "packagePath": "itvisors",
   "scripts": {
-    "start": "pluggable-widgets-tools start:server --open",
-    "dev": "pluggable-widgets-tools start:web",
+    "start": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "lint": "pluggable-widgets-tools lint",
     "lint:fix": "pluggable-widgets-tools lint:fix",
@@ -22,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^8.14.0"
+    "@mendix/pluggable-widgets-tools": "^9.5.4"
   },
   "dependencies": {
     "classnames": "^2.2.6",
