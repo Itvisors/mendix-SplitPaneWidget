@@ -7,7 +7,7 @@ export class preview extends Component {
         return (
             <SplitPaneContainer
                 isPreview
-                class={this.props.class}
+                class={this.props.className}
                 splitType={this.props.splitType}
                 height={height ? height : "500px"}
                 defaultSize={defaultSize ? defaultSize : 400}
