@@ -4,39 +4,57 @@
 
 package myfirstmodule.proxies.microflows;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
-public class Microflows
+public final class Microflows
 {
 	/**
-	 * @deprecated
-	 * The default constructor of the Microflows class should not be used.
-	 * Use the static microflow invocation methods instead.
+	 * Private constructor to prevent instantiation of this class. 
 	 */
-	@java.lang.Deprecated(since = "9.12", forRemoval = true)
-	public Microflows() {}
+	private Microflows() {}
 
 	// These are the microflows for the MyFirstModule module
-	public static void aCT_TestContext_OnChangeSplitter(IContext context, myfirstmodule.proxies.TestContext _testContext)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_TestContext_OnChangeSplitterBuilder(
+		myfirstmodule.proxies.TestContext _testContext
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("TestContext", _testContext == null ? null : _testContext.getMendixObject());
-		Core.microflowCall("MyFirstModule.ACT_TestContext_OnChangeSplitter").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.ACT_TestContext_OnChangeSplitter");
+		builder = builder.withParam("TestContext", _testContext);
+		return builder;
 	}
+
+	public static void aCT_TestContext_OnChangeSplitter(
+		IContext context,
+		myfirstmodule.proxies.TestContext _testContext
+	)
+	{
+		aCT_TestContext_OnChangeSplitterBuilder(
+				_testContext
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder dS_TestContextBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.DS_TestContext");
+		return builder;
+	}
+
 	public static myfirstmodule.proxies.TestContext dS_TestContext(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		IMendixObject result = (IMendixObject)Core.microflowCall("MyFirstModule.DS_TestContext").withParams(params).execute(context);
-		return result == null ? null : myfirstmodule.proxies.TestContext.initialize(context, result);
+		Object result = dS_TestContextBuilder().execute(context);
+		return result == null ? null : myfirstmodule.proxies.TestContext.initialize(context, (IMendixObject) result);
 	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder sUB_TestContext_GetOrCreateBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("MyFirstModule.SUB_TestContext_GetOrCreate");
+		return builder;
+	}
+
 	public static myfirstmodule.proxies.TestContext sUB_TestContext_GetOrCreate(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		IMendixObject result = (IMendixObject)Core.microflowCall("MyFirstModule.SUB_TestContext_GetOrCreate").withParams(params).execute(context);
-		return result == null ? null : myfirstmodule.proxies.TestContext.initialize(context, result);
+		Object result = sUB_TestContext_GetOrCreateBuilder().execute(context);
+		return result == null ? null : myfirstmodule.proxies.TestContext.initialize(context, (IMendixObject) result);
 	}
 }
