@@ -1,75 +1,111 @@
 /*
 CSS taken from example in react-split-pane repo
 */
-div.splitpane-container {
-    position: relative;
-    flex: 1;
+/**
+ * Default styles for react-split-pane v3
+ *
+ * You can import these styles or create your own.
+ *
+ * Customize by overriding CSS custom properties:
+ *
+ *   .my-split-pane {
+ *     --split-pane-divider-size: 8px;
+ *     --split-pane-divider-color: #e0e0e0;
+ *     --split-pane-focus-color: #ff5722;
+ *   }
+ */
+
+:root {
+  /* Divider dimensions */
+  --split-pane-divider-size: 11px;
+  --split-pane-divider-hit-area: 5px;
+
+  /* Divider colors */
+  --split-pane-divider-color: yellow;
+  --split-pane-divider-color-hover: green;
+  /*--split-pane-divider-color: rgba(0, 0, 0, 0.05);
+  --split-pane-divider-color-hover: rgba(0, 0, 0, 0.15); */
+
+  /* Focus state */
+  --split-pane-focus-color: #2196f3;
+  --split-pane-focus-bg: rgba(33, 150, 243, 0.1);
+
+  /* Animation */
+  --split-pane-transition-duration: 0.2s;
 }
 
-div.splitpane-container .Resizer {
-    background: #000;
-    opacity: 0.2;
-    z-index: 1;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding;
-    background-clip: padding-box;
+/* Dark theme defaults */
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --split-pane-divider-color: rgba(255, 255, 255, 0.05);
+    --split-pane-divider-color-hover: rgba(255, 255, 255, 0.15);
+  }
+} */
+
+.split-pane {
+  position: relative;
+  overflow: hidden;
 }
 
-div.splitpane-container .Resizer:hover {
-    -webkit-transition: all 2s ease;
-    transition: all 2s ease;
+.split-pane-pane {
+  position: relative;
+  overflow: auto;
 }
 
-div.splitpane-container .Resizer.horizontal {
-    height: 11px;
-    margin: -5px 0;
-    border-top: 5px solid rgba(255, 255, 255, 0);
-    border-bottom: 5px solid rgba(255, 255, 255, 0);
-    cursor: row-resize;
-    width: 100%;
+.split-pane-divider {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  background-clip: padding-box;
+  background-color: var(--split-pane-divider-color);
+  transition: background-color var(--split-pane-transition-duration) ease;
 }
 
-div.splitpane-container .Resizer.horizontal:hover {
-    border-top: 5px solid rgba(0, 0, 0, 0.5);
-    border-bottom: 5px solid rgba(0, 0, 0, 0.5);
+.split-pane-divider:hover {
+  background-color: var(--split-pane-divider-color-hover);
 }
 
-div.splitpane-container .Resizer.vertical {
-    width: 11px;
-    margin: 0 -5px;
-    border-left: 5px solid rgba(255, 255, 255, 0);
-    border-right: 5px solid rgba(255, 255, 255, 0);
-    cursor: col-resize;
+.split-pane-divider:focus {
+  outline: 2px solid var(--split-pane-focus-color);
+  outline-offset: -2px;
+  background-color: var(--split-pane-focus-bg);
 }
 
-div.splitpane-container .Resizer.vertical:hover {
-    border-left: 5px solid rgba(0, 0, 0, 0.5);
-    border-right: 5px solid rgba(0, 0, 0, 0.5);
+.split-pane-divider:focus:not(:focus-visible) {
+  outline: none;
 }
 
-div.splitpane-container .Resizer.disabled {
-    cursor: not-allowed;
+/* Horizontal layout (vertical divider) */
+.split-pane-divider.horizontal {
+  width: var(--split-pane-divider-size);
+  margin: 0 calc(var(--split-pane-divider-hit-area) * -1);
+  border-left: var(--split-pane-divider-hit-area) solid transparent;
+  border-right: var(--split-pane-divider-hit-area) solid transparent;
+  cursor: col-resize;
 }
 
-div.splitpane-container .Resizer.disabled:hover {
-    border-color: transparent;
+
+/* Vertical layout (horizontal divider) */
+.split-pane-divider.vertical {
+  height: var(--split-pane-divider-size);
+  margin: calc(var(--split-pane-divider-hit-area) * -1) 0;
+  border-top: var(--split-pane-divider-hit-area) solid transparent;
+  border-bottom: var(--split-pane-divider-hit-area) solid transparent;
+  cursor: row-resize;
 }
 
-div.splitpane-container div.Pane {
-    overflow-y: auto;
+
+/* Minimal theme (1px divider) */
+.split-pane-divider.minimal {
+  --split-pane-divider-size: 1px;
+  --split-pane-divider-hit-area: 0px;
+  --split-pane-divider-color: rgba(0, 0, 0, 0.12);
+  border: none;
+  margin: 0;
 }
 
-div.splitpane-content.horizontal-pane {
-    width: 100%;
-}
-
-div.splitpane-container.max-height div.splitpane-content.vertical-pane {
-    height: 100%;
-}
-
-div.splitpane-container.max-height div.splitpane-content.vertical-pane .content-max-height {
-    height: 100%;
+@media (prefers-color-scheme: dark) {
+  .split-pane-divider.minimal {
+    --split-pane-divider-color: rgba(255, 255, 255, 0.12);
+  }
 }

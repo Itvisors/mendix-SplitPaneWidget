@@ -1,5 +1,5 @@
 import { Component, createElement } from "react";
-import SplitPane from "react-split-pane";
+import { Pane, SplitPane } from "react-split-pane";
 
 export class SplitPaneContainer extends Component {
     constructor(props) {
@@ -16,32 +16,34 @@ export class SplitPaneContainer extends Component {
             console.warn("SplitPaneWidget: Property sizeAttr is readonly");
             return null;
         }
-        const minSize = minSizePrimary > 0 ? minSizePrimary : 0;
+        const minSizePrimaryValue = minSizePrimary > 0 ? minSizePrimary : 0;
 
         // Negative value sets minimum size for the right or bottom pane. Don't bother the Mendix developer with that,
         // they can just set a minimum value for the right/bottom container.
-        const maxSize = minSizeSecondary > 20 ? -minSizeSecondary : -20;
+        const minSizeSecondaryValue = minSizeSecondary > 20 ? minSizeSecondary : 20;
 
         let sizeValue = sizeAttr?.value ? Number(sizeAttr.value) : 0;
         if (sizeValue === 0) {
             sizeValue = this.props.defaultSize;
         }
-        if (sizeValue < minSize) {
-            sizeValue = minSize;
+        if (sizeValue < minSizePrimaryValue) {
+            sizeValue = minSizePrimaryValue;
         }
+
+        // After the rewrite for v3 the new direction property is opposite of the old split type.
+        // To avoid rework we reverse the value here
+        const direction = this.props.splitType === "vertical" ? "horizontal" : "vertical";
 
         const className = "splitpane-container " + this.props.class;
         return (
             <div className={className} style={{ height: this.props.height }}>
-                <SplitPane
-                    split={this.props.splitType}
-                    defaultSize={sizeValue + "px"}
-                    minSize={minSize}
-                    maxSize={maxSize}
-                    onDragFinished={this.handleDragFinished}
-                >
-                    {this.getPaneContent(this.props.primaryContent, this.props.primaryContentPreview)}
-                    {this.getPaneContent(this.props.secondaryContent, this.props.secondaryContentPreview)}
+                <SplitPane direction={direction} onResizeEnd={this.handleDragFinished}>
+                    <Pane defaultSize={sizeValue + "px"} minSize={minSizePrimaryValue} size={sizeValue}>
+                        {this.getPaneContent(this.props.primaryContent, this.props.primaryContentPreview)}
+                    </Pane>
+                    <Pane minSize={minSizeSecondaryValue}>
+                        {this.getPaneContent(this.props.secondaryContent, this.props.secondaryContentPreview)}
+                    </Pane>
                 </SplitPane>
             </div>
         );
