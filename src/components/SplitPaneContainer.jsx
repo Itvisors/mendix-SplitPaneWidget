@@ -1,76 +1,92 @@
-import { Component, createElement } from "react";
 import { Pane, SplitPane } from "react-split-pane";
+import { createElement, useCallback } from "react";
 
-export class SplitPaneContainer extends Component {
-    constructor(props) {
-        super(props);
+export function SplitPaneContainer(props) {
+    const { minSizePrimary, minSizeSecondary, sizeAttr, onChangeAction } = props;
 
-        this.handleDragFinished = this.handleDragFinished.bind(this);
-    }
-    render() {
-        const { minSizePrimary, minSizeSecondary, sizeAttr } = this.props;
-        if (sizeAttr && sizeAttr.status !== "available") {
-            return null;
-        }
-        if (sizeAttr && sizeAttr.status === "available" && sizeAttr.readOnly) {
-            console.warn("SplitPaneWidget: Property sizeAttr is readonly");
-            return null;
-        }
-        const minSizePrimaryValue = minSizePrimary > 0 ? minSizePrimary : 0;
+    const handleDragFinished = useCallback(
+        newSize => {
+            // console.info("SplitPaneContainer handleDragFinished new size: " + newSize);
+            if (sizeAttr) {
+                sizeAttr.setTextValue("" + newSize);
+                if (onChangeAction && onChangeAction.canExecute && !onChangeAction.isExecuting) {
+                    onChangeAction.execute();
+                }
+            }
+        },
+        [sizeAttr, onChangeAction]
+    );
 
-        // Negative value sets minimum size for the right or bottom pane. Don't bother the Mendix developer with that,
-        // they can just set a minimum value for the right/bottom container.
-        const minSizeSecondaryValue = minSizeSecondary > 20 ? minSizeSecondary : 20;
+    const getPaneContent = useCallback(
+        (content, direction, contentPreview) => {
+            const className = "splitpane-content " + direction + "-pane";
+            if (props.isPreview) {
+                const ContentRenderer = contentPreview.renderer;
+                return (
+                    <ContentRenderer>
+                        <div className={className} />
+                    </ContentRenderer>
+                );
+            }
+            return <div className={className}>{content}</div>;
+        },
+        [props.isPreview]
+    );
 
-        let sizeValue = sizeAttr?.value ? Number(sizeAttr.value) : 0;
-        if (sizeValue === 0) {
-            sizeValue = this.props.defaultSize;
-        }
-        if (sizeValue < minSizePrimaryValue) {
-            sizeValue = minSizePrimaryValue;
-        }
+    // The default divider has element style width: 10px that prevented the divider from showing unless hovered over.
+    // This custom divider may be removed if that issue is fixed in a newer release of the library.
+    function getCustomDivider(dividerProps) {
+        const { direction, isDragging, disabled, onMouseDown, onTouchStart, onTouchEnd, onKeyDown } = dividerProps;
 
-        // After the rewrite for v3 the new direction property is opposite of the old split type.
-        // To avoid rework we reverse the value here
-        const direction = this.props.splitType === "vertical" ? "horizontal" : "vertical";
-
-        const className = "splitpane-container " + this.props.class;
         return (
-            <div className={className} style={{ height: this.props.height }}>
-                <SplitPane direction={direction} onResizeEnd={this.handleDragFinished}>
-                    <Pane defaultSize={sizeValue + "px"} minSize={minSizePrimaryValue} size={sizeValue}>
-                        {this.getPaneContent(this.props.primaryContent, this.props.primaryContentPreview)}
-                    </Pane>
-                    <Pane minSize={minSizeSecondaryValue}>
-                        {this.getPaneContent(this.props.secondaryContent, this.props.secondaryContentPreview)}
-                    </Pane>
-                </SplitPane>
-            </div>
+            <div
+                role="separator"
+                aria-orientation={direction === "horizontal" ? "vertical" : "horizontal"}
+                tabIndex={disabled ? -1 : 0}
+                className={`split-pane-divider ${direction}${isDragging ? " dragging" : ""}`}
+                onMouseDown={disabled ? undefined : onMouseDown}
+                onTouchStart={disabled ? undefined : onTouchStart}
+                onTouchEnd={disabled ? undefined : onTouchEnd}
+                onKeyDown={disabled ? undefined : onKeyDown}
+            />
         );
     }
 
-    handleDragFinished(newSize) {
-        const { sizeAttr, onChangeAction } = this.props;
-        // console.info("SplitPaneContainer handleDragFinished new size: " + newSize);
-        if (sizeAttr) {
-            sizeAttr.setTextValue("" + newSize);
-            if (onChangeAction && onChangeAction.canExecute && !onChangeAction.isExecuting) {
-                onChangeAction.execute();
-            }
-        }
+    if (sizeAttr && sizeAttr.status !== "available") {
+        return null;
+    }
+    if (sizeAttr && sizeAttr.status === "available" && sizeAttr.readOnly) {
+        console.warn("SplitPaneWidget: Property sizeAttr is readonly");
+        return null;
     }
 
-    getPaneContent(content, contentPreview) {
-        const className = "splitpane-content " + this.props.splitType + "-pane";
-        if (this.props.isPreview) {
-            const ContentRenderer = contentPreview.renderer;
-            return (
-                <ContentRenderer>
-                    <div className={className} />
-                </ContentRenderer>
-            );
-        } else {
-            return <div className={className}>{content}</div>;
-        }
+    const minSizePrimaryValue = minSizePrimary > 0 ? minSizePrimary : 0;
+    const minSizeSecondaryValue = minSizeSecondary > 20 ? minSizeSecondary : 20;
+
+    let sizeValue = sizeAttr?.value ? Number(sizeAttr.value) : 0;
+    if (sizeValue === 0) {
+        sizeValue = props.defaultSize;
     }
+    if (sizeValue < minSizePrimaryValue) {
+        sizeValue = minSizePrimaryValue;
+    }
+
+    // After the rewrite for v3 the new direction property is opposite of the old split type.
+    // To avoid rework we reverse the value here
+    const direction = props.splitType === "vertical" ? "horizontal" : "vertical";
+
+    const className = "splitpane-container " + props.class;
+
+    return (
+        <div className={className} style={{ height: props.height }}>
+            <SplitPane direction={direction} divider={getCustomDivider} onResizeEnd={handleDragFinished}>
+                <Pane defaultSize={sizeValue + "px"} minSize={minSizePrimaryValue} size={sizeValue}>
+                    {getPaneContent(props.primaryContent, direction, props.primaryContentPreview)}
+                </Pane>
+                <Pane minSize={minSizeSecondaryValue}>
+                    {getPaneContent(props.secondaryContent, direction, props.secondaryContentPreview)}
+                </Pane>
+            </SplitPane>
+        </div>
+    );
 }
