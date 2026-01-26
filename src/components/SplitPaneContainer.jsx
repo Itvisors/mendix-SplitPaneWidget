@@ -5,10 +5,10 @@ export function SplitPaneContainer(props) {
     const { minSizePrimary, minSizeSecondary, sizeAttr, onChangeAction } = props;
 
     const handleDragFinished = useCallback(
-        newSize => {
-            // console.info("SplitPaneContainer handleDragFinished new size: " + newSize);
+        newSizes => {
+            // console.info("SplitPaneContainer handleDragFinished new sizes: " + newSizes[0] + " / " + newSizes[1]);
             if (sizeAttr) {
-                sizeAttr.setTextValue("" + newSize);
+                sizeAttr.setTextValue("" + newSizes[0]);
                 if (onChangeAction && onChangeAction.canExecute && !onChangeAction.isExecuting) {
                     onChangeAction.execute();
                 }
