@@ -13,9 +13,6 @@ The platform used to have one but it got removed in Mendix 7, without a proper r
 - Configure minimum sizes for each pane.
 - Multiple split panes can be nested to create an IDE style page
 
-## Limitations
-- Mendix does not allow just any widget to be placed in the container of a pluggable widget. Unfortunately this also includes datagrid and listview.
-
 ## Usage
 - Place the widget on the page
 - Put content in each panel
