@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, createElement } from "react";
 import { SplitPaneContainer } from "./components/SplitPaneContainer";
 
 export class preview extends Component {
