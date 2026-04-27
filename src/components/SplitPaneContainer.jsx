@@ -1,5 +1,5 @@
 import { Pane, SplitPane } from "react-split-pane";
-import { createElement, useCallback } from "react";
+import { useCallback } from "react";
 
 export function SplitPaneContainer(props) {
     const { minSizePrimary, minSizeSecondary, sizeAttr, onChangeAction } = props;

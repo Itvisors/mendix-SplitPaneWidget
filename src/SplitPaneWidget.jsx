@@ -1,5 +1,4 @@
 import { SplitPaneContainer } from "./components/SplitPaneContainer";
-import { createElement } from "react";
 
 // eslint-disable-next-line sort-imports
 import "./ui/SplitPaneWidget.css";
