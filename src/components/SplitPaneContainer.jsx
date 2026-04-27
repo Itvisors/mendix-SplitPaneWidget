@@ -8,7 +8,8 @@ export function SplitPaneContainer(props) {
         newSizes => {
             // console.info("SplitPaneContainer handleDragFinished new sizes: " + newSizes[0] + " / " + newSizes[1]);
             if (sizeAttr) {
-                sizeAttr.setTextValue("" + newSizes[0]);
+                // Value must be passed as integer otherwise the action will not be called
+                sizeAttr.setTextValue("" + Math.floor(newSizes[0]));
                 if (onChangeAction && onChangeAction.canExecute && !onChangeAction.isExecuting) {
                     onChangeAction.execute();
                 }
@@ -36,7 +37,7 @@ export function SplitPaneContainer(props) {
     // The default divider has element style width: 10px that prevented the divider from showing unless hovered over.
     // This custom divider may be removed if that issue is fixed in a newer release of the library.
     function getCustomDivider(dividerProps) {
-        const { direction, isDragging, disabled, onMouseDown, onTouchStart, onTouchEnd, onKeyDown } = dividerProps;
+        const { direction, isDragging, disabled, onPointerDown, onKeyDown } = dividerProps;
 
         return (
             <div
@@ -44,9 +45,7 @@ export function SplitPaneContainer(props) {
                 aria-orientation={direction === "horizontal" ? "vertical" : "horizontal"}
                 tabIndex={disabled ? -1 : 0}
                 className={`split-pane-divider ${direction}${isDragging ? " dragging" : ""}`}
-                onMouseDown={disabled ? undefined : onMouseDown}
-                onTouchStart={disabled ? undefined : onTouchStart}
-                onTouchEnd={disabled ? undefined : onTouchEnd}
+                onPointerDown={disabled ? undefined : onPointerDown}
                 onKeyDown={disabled ? undefined : onKeyDown}
             />
         );
